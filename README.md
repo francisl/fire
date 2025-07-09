@@ -1,5 +1,4 @@
-# fire
-Live reload for Mojo Applications
+# 🔥 - Live reload for Mojo Applications
 
 Watch the directory containing the target file
 and automatically recompile when .mojo or .py files change.
@@ -32,7 +31,7 @@ Example:
 
 > git clone https://github.com/francisl/fire.git
 > cd fire
-> mojo src/fire.mojo
+> mojo build src/fire.mojo
 
 This will create a binary `fire`
 

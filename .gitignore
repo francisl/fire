@@ -1,7 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
-*$py.class
+*$py.classj
 
 # C extensions
 *.so
@@ -208,3 +208,7 @@ __marimo__/
 
 # pixi environments
 .pixi
+
+# app specific files
+fire
+
