@@ -11,6 +11,7 @@ Be faster to develop mojo long running mojo application like web server.
 
 - Scan .mojo and .py files
 - Build and rerun the program
+- Available as a binary
 
 ### To be added
 
@@ -18,7 +19,7 @@ Be faster to develop mojo long running mojo application like web server.
 - Help flag
 - script install
 - package install
-- User native watcher when binding for mojo are available/possible like libuv or inotify-tools.
+- Use native watcher when binding for mojo are available/possible like libuv or inotify-tools.
 
 ## Use
 
@@ -36,3 +37,8 @@ Example:
 This will create a binary `fire`
 
 > cp fire /somewhere/in/your/PATH
+
+## Limitation
+
+This module uses python subprocess ans OS modules. This will later need to be port to use native Mojo one when available.
+
