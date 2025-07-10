@@ -109,18 +109,20 @@ fn get_mtime(path: String) raises -> Float64:
     return Float64(stat_result.st_mtime)
 
 fn find_source_files(directory: String) raises -> PythonObject:
-    """Find all .mojo and .py files in the directory."""
+    """Find all .mojo and .py files in the directory and all subdirectories."""
     var os = Python.import_module("os")
     var files = Python.list()
     
-    var entries = os.listdir(directory)
-    for entry in entries:
-        var entry_str = String(entry)
-        var full_path = directory + "/" + entry_str
+    # Use os.walk to recursively traverse all subdirectories
+    for walk_tuple in os.walk(directory):
+        var dirpath = walk_tuple[0]
+        var dirnames = walk_tuple[1]
+        var filenames = walk_tuple[2]
         
-        # Check if it's a file and has .mojo or .py extension
-        if os.path.isfile(full_path):
-            if entry_str.endswith(".mojo") or entry_str.endswith(".py"):
+        for filename in filenames:
+            var filename_str = String(filename)
+            if filename_str.endswith(".mojo") or filename_str.endswith(".py"):
+                var full_path = String(dirpath) + "/" + filename_str
                 files.append(full_path)
     
     return files
@@ -218,7 +220,12 @@ fn main() raises:
         print("This will watch the directory containing the target file")
         print("and automatically recompile when .mojo or .py files change.")
         return
-    
+
+    if args[1] == "--version" or args[1] == "-v":
+        print("Fire - Mojo File Watcher")
+        print("Version 0.0.4")
+        return
+
     var target_file = args[1]
     var watch_directory_path = get_directory_from_path(target_file)
     

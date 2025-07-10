@@ -1,7 +1,7 @@
 # 🔥 - Live reload for Mojo Applications
 
 Watch the directory containing the target file
-and automatically recompile when .mojo or .py files change.
+and live rebuild and run when any .mojo or .py files change.
 
 ## Motivation
 
@@ -15,11 +15,12 @@ Be faster to develop mojo long running mojo application like web server.
 
 ### To be added
 
-- custom build command
-- Help flag
-- script install
-- package install
-- Use native watcher when binding for mojo are available/possible like libuv or inotify-tools.
+- [ ] custom build command
+- [x] version flags
+- [ ] Help flag
+- [ ] script install
+- [ ] package install
+- [ ] Use native watcher when binding for mojo are available/possible like libuv or inotify-tools.
 
 ## Use
 
@@ -40,5 +41,5 @@ This will create a binary `fire`
 
 ## Limitation
 
-This module uses python subprocess ans OS modules. This will later need to be port to use native Mojo one when available.
+This module uses python subprocess and OS modules. This will later need to be port to use native Mojo one when available.
 
