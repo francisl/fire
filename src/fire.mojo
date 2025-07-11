@@ -38,35 +38,9 @@ fn start_mojo_process_background(target_file: String) raises:
     print("-" * 50)
     
     try:
-        # Start process in the background
-        running_process = subprocess.Popen(
-            command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
+        # Start process in the background with output flowing directly to terminal
+        running_process = subprocess.Popen(command)
         print("✅ Process started in background (PID:", running_process.pid, ")")
-        
-        # Optional: You can check if the process is still running
-        var poll_result = running_process.poll()
-        if poll_result != Python.none():
-            # Process has already terminated
-            var stdout = String(running_process.stdout.read())
-            var stderr = String(running_process.stderr.read())
-            
-            if len(stdout) > 0:
-                print("Output:")
-                print(stdout)
-            
-            if len(stderr) > 0:
-                print("Error output:")
-                print(stderr)
-            
-            var return_code = Int(poll_result)
-            if return_code == 0:
-                print("✅ Process completed successfully")
-            else:
-                print("❌ Process failed with exit code:", return_code)
         
     except e:
         print("❌ Failed to start mojo command:", e)
@@ -80,17 +54,6 @@ fn check_process_status() raises:
         var poll_result = running_process.poll()
         if poll_result != Python.none():
             # Process has terminated
-            var stdout = String(running_process.stdout.read())
-            var stderr = String(running_process.stderr.read())
-            
-            if len(stdout) > 0:
-                print("Process output:")
-                print(stdout)
-            
-            if len(stderr) > 0:
-                print("Process errors:")
-                print(stderr)
-            
             var return_code = Int(poll_result)
             if return_code == 0:
                 print("✅ Process completed successfully")
